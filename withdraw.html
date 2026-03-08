@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Withdraw</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;}
+.container{background:white;width:90%;max-width:400px;margin:50px auto;padding:20px;border-radius:10px;}
+input, select{width:90%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px;}
+button{padding:10px 20px;background:#2b7cff;color:white;border:none;border-radius:5px;cursor:pointer;}
+.back-box{display:block;margin-top:20px;padding:12px;background:yellow;border-radius:8px;font-weight:bold;cursor:pointer;}
+#message{margin-top:10px;font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Withdraw</h2>
+<h3>Current Balance: $<span id="balance">0</span></h3>
+<input type="text" id="name" placeholder="Account Holder Name">
+<select id="bank">
+<option value="">Select Bank</option>
+<option>CBE</option>
+<option>Awash Bank</option>
+<option>Bank of Abyssinia</option>
+<option>Dashen Bank</option>
+</select>
+<input type="text" id="account" placeholder="Bank Account Number">
+<input type="number" id="amount" placeholder="Amount to withdraw">
+<button onclick="submitForm()">Submit</button>
+<p id="message"></p>
+<div class="back-box" onclick="goBack()">⬅ Back to Dashboard</div>
+</div>
+
+<script>
+function goBack(){window.location.href="dashboard.html";}
+
+// Load balance safely
+let balance = localStorage.getItem("balance");
+if(balance === null || isNaN(balance)) balance = 0;
+else balance = parseFloat(balance);
+
+// Display current balance
+document.getElementById("balance").innerText = balance.toFixed(2);
+
+function submitForm(){
+let name=document.getElementById("name").value;
+let bank=document.getElementById("bank").value;
+let account=document.getElementById("account").value;
+let amount=parseFloat(document.getElementById("amount").value);
+let message=document.getElementById("message");
+
+if(name=="" || bank=="" || account=="" || !amount || amount<=0){
+    message.style.color="red"; message.innerHTML="Insert all info correctly!";
+    return;
+}
+
+if(amount>balance){
+    message.style.color="red"; message.innerHTML="Insufficient balance!";
+    return;
+}
+
+// Subtract amount from balance
+balance -= amount;
+localStorage.setItem("balance", balance);
+
+// Update balance display
+document.getElementById("balance").innerText = balance.toFixed(2);
+
+message.style.color="green"; message.innerHTML="Withdraw submitted successfully!";
+}
+</script>
+</body>
+</html>

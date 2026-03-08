@@ -1,0 +1,200 @@
+<h3>Your balance: $<span id="balance"></span></h3>
+<p id="message"></p>
+<script>
+let balance = parseFloat(localStorage.getItem("balance")) || 0
+document.getElementById("balance").innerText = balance
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+}
+
+.container{
+background:white;
+width:90%;
+max-width:400px;
+margin:50px auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.back-box{
+margin-top:20px;
+padding:12px;
+background:yellow;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Product Page</h2>
+
+<script>
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product Investment</title>
+<style>
+body {
+  font-family: Arial;
+  background:#f4f4f4;
+  text-align:center;
+  margin:0;
+  padding:0;
+}
+
+/* Container */
+.container {
+  background:white;
+  width:90%;
+  max-width:400px;
+  margin:50px auto;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Product box */
+.product-box {
+  background:#2b7cff;
+  color:white;
+  padding:15px;
+  margin:15px 0;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* Back button */
+.back-box{
+margin-top:20px;
+padding:12px;
+background:yellow;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#message{
+margin-top:10px;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Product Investment</h2>
+
+<!-- Example Products -->
+<div class="product-box" onclick="buyProduct('Plan A', 1000)">Plan A - 1000</div>
+<div class="product-box" onclick="buyProduct('Plan B', 3000)">Plan B - 3000</div>
+<div class="product-box" onclick="buyProduct('Plan C', 5000)">Plan C - 5000</div>
+<div class="product-box" onclick="buyProduct('Plan D', 7000)">Plan D - 7000</div>
+<div class="product-box" onclick="buyProduct('Plan E', 10000)">Plan E - 10000</div>
+<div class="product-box" onclick="buyProduct('Plan F', 20000)">Plan F - 20000</div>
+
+<p id="message"></p>
+
+<div class="back-box" onclick="goBack()">⬅ Back to Dashboard</div>
+</div>
+<script>
+
+function buyProduct(planName, price){
+
+let balance = localStorage.getItem("balance")
+
+/* convert to number */
+balance = parseFloat(balance) || 0
+
+if(balance >= price){
+
+balance = balance - price
+
+localStorage.setItem("balance", balance)
+
+document.getElementById("message").style.color="green"
+document.getElementById("message").innerHTML =
+"Successfully purchased " + planName
+
+}else{
+
+document.getElementById("message").style.color="red"
+document.getElementById("message").innerHTML =
+"Insufficient balance for " + planName
+
+}
+
+}
+
+</script>
+</body>
+</html>
+<script>
+
+function loadBalance(){
+
+let balance = parseFloat(localStorage.getItem("balance")) || 0;
+
+document.getElementById("balance").innerText = balance;
+
+}
+
+function buyProduct(name, price){
+
+let balance = parseFloat(localStorage.getItem("balance")) || 0;
+
+if(balance >= price){
+
+balance -= price;
+
+/* save new balance */
+localStorage.setItem("balance", balance);
+
+/* update screen immediately */
+document.getElementById("balance").innerText = balance;
+
+document.getElementById("message").style.color="green";
+document.getElementById("message").innerText =
+"Successfully purchased " + name;
+
+}else{
+
+document.getElementById("message").style.color="red";
+document.getElementById("message").innerText =
+"Insufficient balance";
+
+}
+
+}
+
+/* load balance when page opens */
+loadbalance();
+
+</script>
+

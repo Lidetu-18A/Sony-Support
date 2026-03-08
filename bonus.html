@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Newcomer Bonus</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;}
+.container{background:white;width:90%;max-width:400px;margin:50px auto;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+button{padding:10px 20px;background:#2b7cff;color:white;border:none;border-radius:5px;cursor:pointer;}
+.back-box{display:block;margin-top:20px;padding:12px;background:yellow;border-radius:8px;font-weight:bold;cursor:pointer;}
+#message{margin-top:10px;font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="container">
+Balance: $<span id="balance"></span>
+
+<br><br>
+<h2>Newcomer Bonus</h2>
+<h3>🎁 Newcomer Bonus</h3>
+<button onclick="claimBonus()">Claim $200</button>
+<p id="message"></p>
+<div class="back-box" onclick="goBack()">⬅ Back to Dashboard</div>
+</div>
+
+</body>
+</html>
+<script>
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+
+/* Load balance when page opens */
+
+function loadBalance(){
+
+let balance = parseFloat(localStorage.getItem("balance")) || 0;
+
+document.getElementById("balance").innerText = balance;
+
+}
+
+loadBalance();
+
+
+
+/* Claim bonus */
+
+function claimBonus(){
+
+let bonusClaimed = localStorage.getItem("bonusClaimed");
+
+if(bonusClaimed === "true"){
+
+document.getElementById("message").style.color="red";
+document.getElementById("message").innerText =
+"Bonus already claimed.";
+
+return;
+
+}
+
+let balance = parseFloat(localStorage.getItem("balance")) || 0;
+
+/* add 200 */
+
+balance += 200;
+
+/* save balance */
+
+localStorage.setItem("balance", balance);
+
+/* mark claimed */
+
+localStorage.setItem("bonusClaimed","true");
+
+/* update screen */
+
+document.getElementById("balance").innerText = balance;
+
+document.getElementById("message").style.color="green";
+document.getElementById("message").innerText =
+"$200 bonus added successfully!";
+
+}
+
+</script>

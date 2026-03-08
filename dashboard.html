@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html>
+<head>
+<title>WELCOME</title>
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    text-align: center;
+}
+
+/* Large Welcome Heading */
+.welcome-header {
+    font-size: 48px;
+    font-weight: bold;
+    color: #2b7cff;
+    margin: 50px 0 30px 0;
+}
+
+/* Amount Available Box */
+.amount-box {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #28a745; /* green color */
+    color: #FFD700;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+<title>WELCOME</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.task-container{
+display:grid;
+grid-template-columns: repeat(2,1fr);
+gap:15px;
+padding:15px;
+}
+
+.task-box{
+padding:20px;
+border-radius:10px;
+color:white;
+font-weight:bold;
+text-align:center;
+cursor:pointer;
+text-decoration:none;
+}
+
+.recharge{background:linear-gradient(45deg,#ffb347,#ffcc33);}
+.withdraw{background:linear-gradient(45deg,#66c2ff,#0066ff);}
+.points{background:linear-gradient(45deg,#ff9966,#ff5e62);}
+.prize{background:linear-gradient(45deg,#d53369,#daae51);}
+.photo{background:linear-gradient(45deg,#43cea2,#185a9d);}
+.app{background:linear-gradient(45deg,#2193b0,#6dd5ed);}
+.bonus{background:linear-gradient(45deg,#ff7e5f,#feb47b);}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>WELCOME TO SONY</h1>
+<h2>Your Balance: $<span id="balance"></span></h2>
+
+<div class="task-container">
+
+<a href="recharge.html" class="task-box recharge">Recharge</a>
+<a href="withdraw.html" class="task-box withdraw">Withdraw</a>
+<a href="points.html" class="task-box points">Points Mall</a>
+<a href="prize.html" class="task-box prize">Prize Money</a>
+<a href="product.html" class="task-box">
+<h3>Product</h3>
+<p>View available products</p>
+</a>
+<a href="photo.html" class="task-box photo">Photo Reward</a>
+<a href="app.html" class="task-box app">App Download</a>
+<a href="bonus.html" class="task-box bonus">Newcomer Bonus</a>
+</div>
+</div>
+</body>
+</html>
+<script>
+
+/* Get balance from storage */
+
+let balance = localStorage.getItem("balance");
+
+/* If no balance exists, create one */
+
+if(balance === null){
+balance = 0;
+localStorage.setItem("balance", balance);
+}
+
+/* Display balance */
+
+document.getElementById("balance").innerText = balance;
+
+</script>
+

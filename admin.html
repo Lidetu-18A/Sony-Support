@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<h2>Admin Panel</h2>
+
+<p>Click the button to show bank account info for deposits:</p>
+
+<button onclick="showBank()">Add Money</button>
+
+<!-- This is where the info will appear -->
+<p id="bankInfo" style="margin-top:20px; font-weight:bold; color:#1e90ff;"></p>
+
+</div>
+
+<script>
+function showBank(){
+    document.getElementById("bankInfo").innerHTML = 
+    "CBE Account: 1000299522648 <br> Name: Lidetu Abera Beyene";
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<h2>Admin Panel</h2>
+
+<p>Click the button to show bank account info and add money:</p>
+
+<input type="number" id="amount" placeholder="Enter amount to add">
+<button onclick="addMoney()">Add Money</button>
+
+<p id="bankInfo" style="margin-top:20px; font-weight:bold; color:#1e90ff;"></p>
+<p id="message" style="color:green; font-weight:bold; margin-top:10px;"></p>
+
+</div>
+
+<script>
+function addMoney() {
+    // Get amount entered
+    let amount = document.getElementById("amount").value;
+    if(amount == "" || amount <= 0){
+        alert("Enter a valid amount!");
+        return;
+    }
+
+    // Show bank info
+    document.getElementById("bankInfo").innerHTML = 
+    "CBE Account: 1000299522648 <br> Name: Lidetu Abera Beyene";
+
+    // Get current balance from browser storage
+    let balance = localStorage.getItem("balance");
+    if(balance == null){
+        balance = 0;
+    }
+
+    // Add new amount
+    balance = parseInt(balance) + parseInt(amount);
+    localStorage.setItem("balance", balance);
+
+    // Show success message
+    document.getElementById("message").innerHTML = 
+    "Balance updated successfully! Current balance: $" + balance;
+
+    // Clear input
+    document.getElementById("amount").value = "";
+}
+</script>
+
+</body>
+</html>
