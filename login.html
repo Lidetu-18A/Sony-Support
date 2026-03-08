@@ -1,94 +1,45 @@
-<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Login Platform</title>
-
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
 <style>
-
-body{
-    font-family: Arial;
-    background: linear-gradient(135deg,#1e90ff,#00c6ff);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.login-box{
-    background:white;
-    padding:30px;
-    width:320px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-.login-box h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.input-box{
-    margin-bottom:15px;
-}
-
-.input-box input{
-    width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
-
-button{
-    width:100%;
-    padding:10px;
-    background:#1e90ff;
-    border:none;
-    color:white;
-    font-size:16px;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#187bcd;
-}
-
-.register{
-    text-align:center;
-    margin-top:10px;
-}
-
+body{font-family:Arial;text-align:center;background:#f4f4f4;}
+.container{max-width:400px;margin:100px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+input{width:80%;padding:10px;margin:10px 0;border-radius:5px;border:1px solid #ccc;}
+button{padding:10px 20px;background:#2b7cff;color:white;border:none;border-radius:5px;cursor:pointer;}
 </style>
-
 </head>
-
 <body>
-
-<div class="login-box">
-
+<div class="container">
 <h2>Login</h2>
-
-<form action="dashboard.html">
-
-<div class="input-box">
-<input type="text" placeholder="Username" required>
+<input type="text" id="username" placeholder="Username"><br>
+<input type="password" id="password" placeholder="Password"><br>
+<button onclick="login()">Login</button>
+<p id="message"></p>
 </div>
 
-<div class="input-box">
-<input type="password" placeholder="Password" required>
-</div>
+<script>
+function login() {
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
 
-<button type="submit">Login</button>
+  // Simple login
+  if(user === "admin" && pass === "1234") {
+    localStorage.setItem("isLoggedIn","true");
+    window.location.href = "dashboard.html"; // go to dashboard
+  } else {
+    document.getElementById("message").style.color="red";
+    document.getElementById("message").innerText = "Invalid login!";
+  }
+}
 
-</form>
-
-<div class="register">
-<p>Don't have account? <a href="register.html">Register</a></p>
-</div>
-
-</div>
-
+// Redirect if dashboard opened without login
+if(window.location.pathname.includes("dashboard.html")) {
+  if(localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+}
+</script>
 </body>
 </html>
