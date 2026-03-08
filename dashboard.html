@@ -91,22 +91,19 @@ text-decoration:none;
 </div>
 </body>
 </html>
-<script>
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let currentUser = localStorage.getItem("currentUser");
+let userData = users.find(u => u.username === currentUser);
 
-/* Get balance from storage */
-
-let balance = localStorage.getItem("balance");
-
-/* If no balance exists, create one */
-
-if(balance === null){
-balance = 0;
-localStorage.setItem("balance", balance);
-}
-
-/* Display balance */
-
+let balance = userData ? userData.balance : 0;
 document.getElementById("balance").innerText = balance;
 
-</script>
-
+// When updating balance (e.g., bonus, recharge), also update localStorage users list
+function updateBalance(newBalance){
+    if(userData){
+        userData.balance = newBalance;
+        // Save back to localStorage
+        localStorage.setItem("users", JSON.stringify(users));
+        document.getElementById("balance").innerText = newBalance;
+    }
+}

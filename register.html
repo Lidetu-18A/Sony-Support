@@ -1,23 +1,60 @@
-<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html>
 <head>
 <title>Register</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{font-family:Arial;text-align:center;background:#f4f4f4;}
+.container{max-width:400px;margin:50px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+input{width:80%;padding:10px;margin:10px 0;border-radius:5px;border:1px solid #ccc;}
+button{padding:10px 20px;background:#28a745;color:white;border:none;border-radius:5px;cursor:pointer;}
+p{font-weight:bold;}
+</style>
 </head>
-
 <body>
+<div class="container">
+<h2>Register</h2>
+<input type="text" id="newUsername" placeholder="Username"><br>
+<input type="password" id="newPassword" placeholder="Password"><br>
+<button onclick="registerUser()">Register</button>
+<p id="message"></p>
+<div style="margin-top:10px;">
+<a href="login.html">Already have an account? Login</a>
+</div>
+</div>
 
-<h2>Create Account</h2>
+<script>
+function registerUser(){
+    let username = document.getElementById("newUsername").value;
+    let password = document.getElementById("newPassword").value;
+    
+    if(username === "" || password === ""){
+        document.getElementById("message").style.color = "red";
+        document.getElementById("message").innerText = "Please fill all fields!";
+        return;
+    }
 
-<form action="login.html">
+    // Get users list from localStorage
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-<input type="text" placeholder="Username" required><br><br>
-<input type="email" placeholder="Email" required><br><br>
-<input type="password" placeholder="Password" required><br><br>
+    // Check if username exists
+    let exists = users.find(u => u.username === username);
+    if(exists){
+        document.getElementById("message").style.color = "red";
+        document.getElementById("message").innerText = "Username already exists!";
+        return;
+    }
 
-<button type="submit">Register</button>
+    // Add new user
+    users.push({username: username, password: password, balance: 0});
+    localStorage.setItem("users", JSON.stringify(users));
 
-</form>
+    document.getElementById("message").style.color = "green";
+    document.getElementById("message").innerText = "Account created successfully!";
 
+    // Redirect to login after 1.5 seconds
+    setTimeout(()=>{ window.location.href = "login.html"; }, 1500);
+}
+</script>
 </body>
 </html>
