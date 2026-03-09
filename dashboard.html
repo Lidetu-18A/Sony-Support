@@ -91,6 +91,7 @@ text-decoration:none;
 </div>
 </body>
 </html>
+<script>
 let users = JSON.parse(localStorage.getItem("users")) || [];
 let currentUser = localStorage.getItem("currentUser");
 let userData = users.find(u => u.username === currentUser);
@@ -98,12 +99,11 @@ let userData = users.find(u => u.username === currentUser);
 let balance = userData ? userData.balance : 0;
 document.getElementById("balance").innerText = balance;
 
-// When updating balance (e.g., bonus, recharge), also update localStorage users list
 function updateBalance(newBalance){
     if(userData){
         userData.balance = newBalance;
-        // Save back to localStorage
         localStorage.setItem("users", JSON.stringify(users));
         document.getElementById("balance").innerText = newBalance;
     }
 }
+</script>

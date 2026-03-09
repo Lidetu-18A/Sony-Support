@@ -34,7 +34,7 @@ function registerUser(){
         return;
     }
 
-    // Get users list from localStorage
+    // Load users
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
     // Check if username exists
@@ -52,7 +52,6 @@ function registerUser(){
     document.getElementById("message").style.color = "green";
     document.getElementById("message").innerText = "Account created successfully!";
 
-    // Redirect to login after 1.5 seconds
     setTimeout(()=>{ window.location.href = "login.html"; }, 1500);
 }
 </script>
